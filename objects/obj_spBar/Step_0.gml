@@ -1,0 +1,1 @@
+image_xscale = clamp((global.plrSP / global.plrMaxSP) / 6.7,0,1);

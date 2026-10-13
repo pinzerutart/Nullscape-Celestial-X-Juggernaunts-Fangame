@@ -1,0 +1,10 @@
+objectToShake = 0;
+strength = 1;
+lose = 0.9;
+startCode = false;
+cdS = 0;
+inCooldown = false;
+typeShake = 0;
+Sided = 0;
+oneSideRun = false;
+origPos = false;

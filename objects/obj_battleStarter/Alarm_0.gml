@@ -1,0 +1,1 @@
+platformerModeDisable(1)

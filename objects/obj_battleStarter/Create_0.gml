@@ -1,0 +1,10 @@
+battleTheme = snd_nothing;
+backgroundID = 0;
+posX = obj_PlayerMap.x;
+posY = obj_PlayerMap.y;
+battleID = 0;
+introSpeed = 1;
+obj = 0;
+objX = 0;
+objY = 0;
+disappearOneUse = false;

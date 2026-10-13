@@ -1,0 +1,1 @@
+if interactNeeded == true { room_goto(roomTP);  }

@@ -1,0 +1,1 @@
+damage(knockback,dmg,bonusDmg,atkStat,defThing,invF,sound,typeR)

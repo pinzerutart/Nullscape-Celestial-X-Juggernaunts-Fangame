@@ -1,0 +1,1 @@
+stopOnEndAnim = 0;

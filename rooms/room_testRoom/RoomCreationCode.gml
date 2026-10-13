@@ -1,0 +1,1 @@
+global.inPlatformer = 1;
