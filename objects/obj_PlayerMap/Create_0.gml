@@ -36,13 +36,17 @@ ptorso.image_xscale = 1;
 ptorso.image_yscale = 1;
 ptorso.image_speed = 0;
 
-plegs = instance_create_depth(x, y, depth, obj_plrLegs_map);
-plegs.image_xscale = 1;
-plegs.image_yscale = 1;
-plegs.image_speed = 0;
 
-hurtBox = instance_create_depth(x, y, depth, obj_plrHurtbox);
-hurtBox.depth -= 1;
-hurtBox.image_alpha = 0;
-hurtBox.image_xscale = 2;
-hurtBox.image_yscale = 2;
+if not instance_exists(obj_plrHurtbox) {
+	global.plrPossesed = true;
+	hurtBox = instance_create_depth(x, y, depth, obj_plrHurtbox);
+	hurtBox.image_alpha = 0;
+	hurtBox.depth -= 1;
+	hurtBox.image_xscale = 2;
+	hurtBox.image_yscale = 2;
+}else {
+	hurtBox = obj_plrHurtbox;
+	hurtBox.layer = layer_get_id("Instances");
+	hurtBox.depth -= 1;
+	hurtBox.image_alpha = 0;
+}

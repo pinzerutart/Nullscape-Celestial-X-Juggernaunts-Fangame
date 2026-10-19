@@ -2,10 +2,13 @@ waitTime = 0;
 lineData = [];
 startCode = false;
 alarmSuccess = false;
+texted = false;
 stringOfThing = "Idk"
 
 
 startFunction = function() {
+	audio_play_sound(lineData.voiceLine,1,false);
+	
 	global.currentLine += 1;
 	global.currentLetters = 1;
 	array_resize(global.cTextINFO,0);
@@ -21,9 +24,9 @@ startFunction = function() {
 	"font": lineData.font,
 	"voiceLine": lineData.voiceLine,
 	"code": lineData.code,
+	"effects": lineData.effects,
+	"origin_": lineData.origin_,
 	});
 
-	//show_debug_message(lineData);
-
-	alarm[1] = game_get_speed(gamespeed_fps) * 1;
+	instance_destroy();
 };

@@ -26,6 +26,7 @@ global.MainAbility = "Sword";
 global.Ability1 = "Nothing";
 global.Ability2 = "Nothing";
 global.Ability3 = "Nothing";
+global.Mode = "Dash";
 
 //OTHER
 global.inPlatformer = 0;

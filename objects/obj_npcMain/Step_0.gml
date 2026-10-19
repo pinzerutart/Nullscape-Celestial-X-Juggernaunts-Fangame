@@ -5,8 +5,12 @@ if (!instance_exists(thePlayer)) {
 if enemyType == 998 {
 	if celesteIntro == false {
 		global.plrSpeed += 25;
-		global.inDanger += 1;
 		global.plrResistance += 90;
+		global.plrAnchor += 1;
+		global.plrSoftlock += 1;
+		obj_plrTorso.image_alpha = 0;
+		obj_plrLegs.image_alpha = 0;
+		
 		array_push(attacksAllowed,"FALL","CRUMBLE", "ORBS");
 		//array_push(attacksAllowed,"INCINERATE","FALL");
 		
@@ -46,12 +50,12 @@ if enemyType == 998 {
 		catk = 999;
 		body.sprite_index = spr_celestial_cocon;
 		body.image_speed = 1;
+	
+		call_later(1,time_source_units_seconds,function(){ celesteAppearedIntro = false; audio_play_sound(mus_celestial_intro,0,false); })
+		call_later(1.5,time_source_units_seconds,function(){ celestialStartIntroText = true; })
 		
-		audio_play_sound(snd_celestial_talk1,10,false);
-		audio_play_sound(mus_celestial_intro,0,false);
 		
-		call_later(2.5,time_source_units_seconds,function(){
-			audio_play_sound(snd_celestial_talk4,10,false);
+		call_later(17.5,time_source_units_seconds,function(){
 			body.image_speed = 1;
 			body.image_index = 0;
 			body.sprite_index = spr_celestial_eyesOpenning;
@@ -59,30 +63,35 @@ if enemyType == 998 {
 			stopAnimOnEnd = true;
 		})
 		
-		call_later(4,time_source_units_seconds,function(){
+		call_later(21.5,time_source_units_seconds,function(){
+			celestialStartIntroText = false;
 			body.image_speed = 1;
 			body.image_index = 0;
 			body.sprite_index = spr_celestial_breakFree;
+			
+			call_later(1.5,time_source_units_seconds,function(){ celestialDisappearIntro = false; })
 		})
 		
-		call_later(5,time_source_units_seconds,function(){
-			celestialDisappearIntro = false;
-		})
-		
-		call_later(7.5,time_source_units_seconds,function(){
+		call_later(23.5,time_source_units_seconds,function(){
 			stopAnimOnEnd = false;
-			celesteAppearedIntro = false;
-			catk = 0;
-			Softlock -= 1;
-			Resistance -= 100;
 			positionXTo = x;
 			positionYTo = y;
 			startPositiong += 1;
+			
+			global.inDanger += 1;
+			global.plrAnchor -= 1;
+			global.plrSoftlock -= 1;
+			obj_plrTorso.image_alpha = 1;
+			obj_plrLegs.image_alpha = 1;
 			
 			audio_stop_sound(mus_celestial_intro);
 			audio_play_sound(snd_celestial_introScreamLoud,0,false);
 			call_later(1.5,time_source_units_seconds,function(){
 				audio_play_sound(mus_nullscape_doesntEndHere,0,false);
+				celesteAppearedIntro = false;
+				catk = 0;
+				Softlock -= 1;
+				Resistance -= 100;
 			})
 		})
 	};

@@ -4,7 +4,7 @@ if (floating) {
 }
 
 if changeSprite == true {
-	var currentIndexToShow = 11 - round(((global.plrHP / global.plrMaxHP) * 11))
+	var currentIndexToShow = 11 - clamp(round(((global.plrHP / global.plrMaxHP) * 11)), 0, 11)
 	image_index = currentIndexToShow;
 }
 

@@ -1,13 +1,10 @@
 if global.inPlatformer >= 1 {
 	ptorso.image_speed = 0;
-	plegs.image_speed = 0;
 	ptorso.image_index = 0;
-	plegs.image_index = 0;
 	
 	if madeInvisible == false {
 		madeInvisible = true;
 		ptorso.image_alpha -= 1;
-		plegs.image_alpha -= 1;
 	}
 	
 	bA = false;
@@ -17,10 +14,17 @@ if global.inPlatformer >= 1 {
 	
 	exit;
 }else if global.inPlatformer <= 0 {
+	if global.inDanger > 0 and global.plrPossesed == true {
+		if hurtBox.image_alpha < 0.99 {
+			hurtBox.image_alpha = lerp(hurtBox.image_alpha,1,0.1);
+		}
+	}else if global.inDanger <= 0 and hurtBox.image_alpha > 0.01 and global.plrPossesed == true {
+		hurtBox.image_alpha = lerp(hurtBox.image_alpha,0,0.1);
+	}
+
 	if madeInvisible == true {
 		madeInvisible = false;
 		ptorso.image_alpha += 1;
-		plegs.image_alpha += 1;
 	}
 }
 
@@ -29,58 +33,44 @@ if global.inPlatformer >= 1 {
 // VISUAL
 ptorso.x = x;
 ptorso.y = y - 33;
-plegs.x = x;
-plegs.y = y - 33;
 
-hurtBox.x = x;
-hurtBox.y = y - 33;
+if global.plrPossesed == true {
+	hurtBox.x = x;
+	hurtBox.y = y - 33;
+}
 
-
-	if global.plrForce[1] != 0 {
-		if global.plrForce[1] > 0 {
-			changedDirectionOfAnim = true;
-			if global.plrAnimChange >= 1 {
-				ptorso.sprite_index = spr_playerBodyVertical_down;
-				plegs.sprite_index = spr_playerLegsVertical;
-			}		
-			ptorso.image_xscale = 1
-			plegs.image_xscale = 1
-			looking = "D"
-		}else if global.plrForce[1] < 0  {
-			changedDirectionOfAnim = true;
-			
-			if global.plrAnimChange >= 1 {
-				ptorso.sprite_index = spr_playerBodyVertical;
-				plegs.sprite_index = spr_playerLegsVertical;
-			}
-			ptorso.image_xscale = -1
-			plegs.image_xscale = -1
-			looking = "U"
+if (global.plrForce[1] != 0 or global.plrForce[0] != 0) and global.plrPossesed == true {
+	if global.plrForce[1] > 0 {
+		if global.plrAnimChange >= 1 {
+			ptorso.sprite_index = spr_plr_walkDown;
+		}		
+		if global.plrAnimChange >= 0 { ptorso.image_xscale = 1 }
+		looking = "D"
+	}else if global.plrForce[1] < 0  {
+		if global.plrAnimChange >= 1 {
+			ptorso.sprite_index = spr_plr_walkUp;
 		}
+		if global.plrAnimChange >= 0 { ptorso.image_xscale = -1 }
+		looking = "U"
 	}
-	if global.plrForce[0] != 0 {
-		if global.plrForce[0] > 0 {
-			changedDirectionOfAnim = true;
+}
+if (global.plrForce[1] != 0 or global.plrForce[0] != 0) and global.plrPossesed == true {
+	if global.plrForce[0] > 0 {
 			
-			if global.plrAnimChange >= 1 {
-				ptorso.sprite_index = spr_playerBodyHorizontal;
-				plegs.sprite_index = spr_playerLegsHorizontal;
-			}
-			ptorso.image_xscale = 1
-			plegs.image_xscale = 1
-			looking = "R"
-		}else if global.plrForce[0] < 0  {
-			changedDirectionOfAnim = true;
-			
-			if global.plrAnimChange >= 1 {
-				ptorso.sprite_index = spr_playerBodyHorizontal;			
-				plegs.sprite_index = spr_playerLegsHorizontal;
-			}
-			ptorso.image_xscale = -1
-			plegs.image_xscale = -1
-			looking = "L"
+		if global.plrAnimChange >= 1 {
+			ptorso.sprite_index = spr_plr_leftRight;
 		}
+		if global.plrAnimChange >= 0 { ptorso.image_xscale = 1 }
+		looking = "R"
+	}else if global.plrForce[0] < 0  {
+			
+		if global.plrAnimChange >= 1 {
+			ptorso.sprite_index = spr_plr_leftRight;			
+		}
+		if global.plrAnimChange >= 0 { ptorso.image_xscale = -1 }
+		looking = "L"
 	}
+}
 
 
 
@@ -88,14 +78,12 @@ if (global.plrForce[0] != 0 or global.plrForce[1] != 0) {
 	walking = true;
 	
 	if global.plrAnimChange >= 1 {
-		ptorso.image_speed = global.plrSpeed / 80;
-		plegs.image_speed = global.plrSpeed / 80;
+		ptorso.image_speed = global.plrSpeed / 17.5;
 	}
 	
 	if oneStepDo == false and global.plrAnimChange >= 1  {
 		oneStepDo = true;
 		ptorso.image_index += 1;
-		plegs.image_index += 1;
 	}
 }
 else{
@@ -105,9 +93,7 @@ else{
 	
 	if global.plrAnimChange >= 1 {
 		ptorso.image_speed = 0;
-		plegs.image_speed = 0;
 		ptorso.image_index = 0;
-		plegs.image_index = 0;
 	}
 }
 
@@ -124,7 +110,6 @@ if (global.plrInvF > 0){
 			invEffectFirst = true;
 			//image_alpha -= 0.5;
 			ptorso.image_alpha -= 0.5;
-			plegs.image_alpha -= 0.5;
 		}
 		
 		if invEffectType == 0 {
@@ -139,14 +124,13 @@ if (global.plrInvF > 0){
 	if invEffectType == 0 and invEffectFirst == true {
 			//image_alpha += 0.5;
 			ptorso.image_alpha += 0.5;
-			plegs.image_alpha += 0.5;
 			invEffect = false;
 		}
 	if invEffectFirst == true {invEffectFirst = false }
 }
 
 var move = function(xGot,yGot) {
-	if global.plrSpeed <= 0 { return }
+	if global.plrSpeed <= 0 or global.plrAnchor > 0 { return; }
 	var dt = delta_time / 100000
 	
 	var xForce = xGot * dt
@@ -184,7 +168,6 @@ if buttonMove {move(0,-global.plrSpeed)}
 
 buttonMove = keyboard_check( ord("S") );
 if buttonMove {move(0,global.plrSpeed)}
-
 // DIRECTION MOVE
 
 buttonMove = keyboard_check_pressed( ord("A") );
@@ -227,7 +210,7 @@ releasedRun = (keyboard_check_released(ord("X")) or keyboard_check_released(vk_s
 if releasedRun {runSystem(0);}
 
 buttonCheck = keyboard_check_pressed(ord("Z")) or keyboard_check_pressed(vk_enter);
-if buttonCheck and global.plrSoftlock <= 0 and not instance_exists(obj_playerCheckBox) {
+if buttonCheck and global.plrSoftlock <= 0 and not instance_exists(obj_playerCheckBox) and obj_plrHurtbox.canMove == false {
 	var offsetX = 35;
 	if looking == "L" {offsetX *= -1;}
 	var offsetY = 0;
@@ -269,6 +252,12 @@ if global.plrHP <= 0 and died == false {
 	global.soulPositionX = obj_plrHurtbox.x;
 	global.soulPositionY = obj_plrHurtbox.y;
 	audio_stop_all();
+	
+	var _duration = 1000;
+	var _starTime = current_time;
+
+	while (current_time - _starTime < _duration) {
+	}
 	
 	room_goto(room_death);
 }

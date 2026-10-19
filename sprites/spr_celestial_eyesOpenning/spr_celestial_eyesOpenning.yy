@@ -54,8 +54,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Basic",
-    "path":"folders/Sprites/Basic.yy",
+    "name":"Celestial",
+    "path":"folders/Sprites/Basic/Characters/Celestial.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

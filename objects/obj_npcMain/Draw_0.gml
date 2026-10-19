@@ -11,3 +11,6 @@ if enemyType == 998 {
 	var stringg = string( (0 - (HP - MaxHp)) ) + "/" + string(MaxHp)
 	draw_text_colour(currentX + (camWidth / 2.1),(currentY + (camHeight / 1.15)),stringg,color1,color1,color2,color2,1);
 }
+
+
+if celestialStartIntroText == true { textAppear(textTableIntro, celestialDialogID); }

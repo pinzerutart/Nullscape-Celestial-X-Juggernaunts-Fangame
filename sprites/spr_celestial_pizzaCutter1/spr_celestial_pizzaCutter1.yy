@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Basic",
-    "path":"folders/Sprites/Basic.yy",
+    "name":"Threats",
+    "path":"folders/Sprites/Basic/Threats.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

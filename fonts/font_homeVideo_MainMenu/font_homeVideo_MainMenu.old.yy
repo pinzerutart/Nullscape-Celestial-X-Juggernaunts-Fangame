@@ -119,8 +119,8 @@
   "maintainGms1Font":false,
   "name":"font_homeVideo_MainMenu",
   "parent":{
-    "name":"JGN-Celestial Boss Fight",
-    "path":"JGN-Celestial Boss Fight.yyp",
+    "name":"Fonts",
+    "path":"folders/Fonts.yy",
   },
   "pointRounding":0,
   "ranges":[

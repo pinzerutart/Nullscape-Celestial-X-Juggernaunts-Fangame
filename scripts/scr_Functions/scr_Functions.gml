@@ -105,15 +105,105 @@ function textAppear(textTable,id_) {
 		});
 	};
 	var lastIndex = array_length(global.cTextINFO) - 1;
+	var	camWidth = camera_get_view_width(view_camera[0]);
+	var	camHeight = camera_get_view_height(view_camera[0]);
+	var	camX = camera_get_view_x(view_camera[0]);
+	var	camY = camera_get_view_y(view_camera[0]);
+	
 	if (lastIndex >= 0) {
 		var textInfo = global.cTextINFO[lastIndex];
 		draw_set_font(textInfo.font);
 		var text = textInfo.text_;
-		var textToShow = string_copy(text,1,global.currentLetters);
-		var drawnText = draw_text(textInfo.pos[0], textInfo.pos[1], textToShow);
 		var currentLetter = string_copy(text,global.currentLetters,global.currentLetters);
+		
+		
+		var textToShow = string_copy(text, 1, global.currentLetters);
+		var effectList = textInfo.effects;
+
+		// Calculate line widths for centering
+		var lineWidths = [];
+		if (textInfo.origin_ == "center") {
+			var tempStr = "";
+			for (var i = 1; i <= string_length(text); i++) {
+				var c = string_char_at(text, i);
+				if (c == "\n") {
+					array_push(lineWidths, string_width(tempStr));
+					tempStr = "";
+				} else {
+					tempStr += c;
+				}
+			}
+			array_push(lineWidths, string_width(tempStr));
+		}
+
+		var currentLineIndex = 0;
+		var txtX = textInfo.pos[0];
+		if (textInfo.origin_ == "center") { txtX -= lineWidths[0] / 2; }
+		var txtY = textInfo.pos[1];
+
+
+		for (var charIndex = 1; charIndex <= string_length(textToShow); charIndex++) {
+		var character = string_char_at(textToShow, charIndex);
+		
+		if (character == "\n") {
+			txtX = textInfo.pos[0];
+			if (textInfo.origin_ == "center") { txtX -= lineWidths[0] / 2; }
+			txtY += string_height("M") / 2;
+			continue;
+		};
+
+		var OffsetX = 0;
+		var OffsetY = 0;
+		var OffsetRotation = 0;
+		var cs1 = make_colour_rgb(255,255,255);
+		var cs2 = make_colour_rgb(255,255,255);
+		var cs3 = make_colour_rgb(255,255,255);
+		var cs4 = make_colour_rgb(255,255,255);
+
+		if (effectList != undefined) {
+			for (var effectIndex = 0; effectIndex < array_length(effectList); effectIndex++) {
+				var effect = effectList[effectIndex];
+				var insideEffectRange = (charIndex >= effect.start and charIndex <= effect.endI);
+
+				if (insideEffectRange and effect.type_ == "shake") {
+					var editedTime = current_time * 0.05 + charIndex * 1.7;
+					OffsetX += sin(editedTime) * effect.intensity;
+					OffsetY += cos(editedTime * 1.3) * effect.intensity;
+				};
+				if (insideEffectRange and effect.type_ == "color") {
+					cs1 = make_colour_rgb(effect.cs1[0],effect.cs1[1],effect.cs1[2]);
+					cs2 = make_colour_rgb(effect.cs2[0],effect.cs2[1],effect.cs2[2]);
+					cs3 = make_colour_rgb(effect.cs3[0],effect.cs3[1],effect.cs3[2]);
+					cs4 = make_colour_rgb(effect.cs4[0],effect.cs4[1],effect.cs4[2]);
+				};
+				if (insideEffectRange and effect.type_ == "randomMovement") {
+					var randSeed = charIndex * 123.45; 
+					var driftSpeed = 0.003; 
+					var waveShift = (charIndex mod 3) * 50; 
+					if charIndex % 2 == 1 { driftSpeed *= 0.5 }
+					var randomX = sin(current_time * driftSpeed + randSeed + waveShift) * cos(current_time * driftSpeed * 0.37 - randSeed);
+					var randomY = cos(current_time * driftSpeed * 0.61 + randSeed * 1.2 + -waveShift) * sin(current_time * driftSpeed * 0.23 + randSeed);
+   
+					OffsetX += randomX * effect.intensity;
+					OffsetY += randomY * effect.intensity;
+				};
+				if (insideEffectRange and effect.type_ == "randomRotations") {
+					var randSeed = charIndex * 123.45; 
+					var driftSpeed = 0.003; 
+					var waveShift = (charIndex mod 3) * 50; 
+					if charIndex % 2 == 1 { driftSpeed *= 0.5 }
+					var randomRotation = sin(current_time * driftSpeed + randSeed + waveShift) * cos(current_time * driftSpeed * 0.37 - randSeed);
+   
+					OffsetRotation += randomRotation * effect.intensity;
+				};
+			};
+		};
+		draw_text_transformed_colour((camX + txtX) + OffsetX, (camY + txtY) + OffsetY, character, 1, 1, OffsetRotation, cs1, cs2, cs3, cs4, 1);
+
+		txtX += string_width(character);
+		};
 					
-		if global.letterCDThing == false {
+		if global.letterCDThing == false and textInfo.speed_ > 0 {
 			global.letterCDThing = true;
 			if global.currentLetters < string_length(text) {
 				global.currentLetters += 1;
@@ -127,7 +217,9 @@ function textAppear(textTable,id_) {
 			call_later(textInfo.speed_,time_source_units_seconds,function(){
 				global.letterCDThing = false;
 			});
-		}
+			
+			audio_play_sound(textInfo.txtSnd,1,false);
+		} else if textInfo.speed_ <= 0 { global.currentLetters = string_length(text) }
 	};
 };
 

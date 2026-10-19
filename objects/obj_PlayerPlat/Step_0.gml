@@ -17,10 +17,6 @@ if global.inDanger > 0 {
 	hurtBox.image_alpha = lerp(hurtBox.image_alpha,0,0.1);
 }
 
-if (global.plrForce[0] != 0 or global.plrForce[1] != 0 or global.plrMoving >= 1) and particleSoulCD == false {
-	part_particles_create(particlePart,obj_plrHurtbox.x,obj_plrHurtbox.y,particleType,1);
-}
-
 if global.plrForce[1] != 0 {
 	if global.plrForce[1] > 0.1 {
 		if global.plrAnimChange >= 2 {
@@ -177,6 +173,7 @@ if (global.plrInvF > 0){
 };
 
 var jump = function() {
+	if global.plrAnchor > 0 { return }
 	if place_meeting(x, y + 1, obj_collisionBlock_plat) or jumpSpare > 0 or flyAmount > 0 {
 		if flyAmount > 0 { flyAmount -= delta_time / 1000000; };
 		jumpSpare = 0;
@@ -189,7 +186,7 @@ var jump = function() {
 };
 
 var move = function(xGot) {
-	if global.plrSpeed <= 0 { return }
+	if global.plrSpeed <= 0 or global.plrAnchor > 0 { return }
 	var dt = delta_time / 100000
 	
 	var xForce = xGot * dt
@@ -254,47 +251,31 @@ if global.inDanger <= 0 {
 	};
 }
 
-dashed = keyboard_check_pressed(ord("Q"));
-if dashed {
-	if dashCD == false and global.plrSP > 30 and (global.plrForce[0] != 0 or global.plrMoving == 1) {
-		global.plrSP -= 30
-		dashCD = true
-		global.plrSpeed += 100;
-		call_later(1,time_source_units_seconds,function(){dashCD = false})
-		call_later(0.5,time_source_units_seconds,function(){particleSoulCD = true})
-		particleSoulCD = false;
-		
-		for (var i = 1; i <= 10; i++) {
-			call_later(i * 0.035,time_source_units_seconds,function(){
-				if died == false and instance_exists(ptorso) {
-					global.plrSpeed -= 10;
-				};
-			});
-		};
-	};
-};
-
 // GRAVITY
 var grav = 0.8;
 var gravX = 0.4;
-var maxFallSpeed = -30;
+var maxFallSpeed = -50;
 
 
-global.plrForce[1] -= grav;
+if global.plrAnchor <= 0 { global.plrForce[1] -= grav; }
 if (global.plrForce[0] > 0) {
+	if global.plrAnchor > 0 { return }
 	global.plrForce[0] -= gravX;
 }
 if (global.plrForce[0] < 0) {
+	if global.plrAnchor > 0 { return }
 	global.plrForce[0] += gravX;
 }
 
 
 if (global.plrForce[1] < maxFallSpeed) {
-    global.plrForce[1] = maxFallSpeed;
+	if global.plrAnchor > 0 { return }
+    global.plrForce[1] = lerp(global.plrForce[1],maxFallSpeed,0.05);
 }
 
 
 if (global.plrForce[1] > 0) or (global.plrForce[1] < 0) {
+	if global.plrAnchor > 0 { return }
     if (place_meeting(x, y - global.plrForce[1], obj_collisionBlock_plat)) {
         while (!place_meeting(x, y - sign(global.plrForce[1]), obj_collisionBlock_plat)) {
             y -= sign(global.plrForce[1]);
@@ -312,6 +293,7 @@ if (global.plrForce[1] > 0) or (global.plrForce[1] < 0) {
 
 
 if (global.plrForce[0] > 0) or (global.plrForce[0] < 0) {
+	if global.plrAnchor > 0 { return }
     if (place_meeting(x - global.plrForce[0], y, obj_collisionBlock_plat)) {
         while (!place_meeting(x - sign(global.plrForce[0]), y, obj_collisionBlock_plat)) {
             x -= sign(global.plrForce[0]);
@@ -341,6 +323,12 @@ if global.plrHP <= 0 and died == false {
 	audio_stop_all()
 	part_system_destroy(particlePart);
 	part_type_destroy(particleType);
+	
+	var _duration = 1000;
+	var _starTime = current_time;
+
+	while (current_time - _starTime < _duration) {
+	}
 	
 	room_goto(room_death)
 }

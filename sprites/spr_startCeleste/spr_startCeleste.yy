@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Basic",
-    "path":"folders/Sprites/Basic.yy",
+    "name":"MapStuff",
+    "path":"folders/Sprites/Basic/MapStuff.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

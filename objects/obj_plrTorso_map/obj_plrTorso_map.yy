@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_playerBodyVertical",
-    "path":"sprites/spr_playerBodyVertical/spr_playerBodyVertical.yy",
+    "name":"spr_plr_walkUp",
+    "path":"sprites/spr_plr_walkUp/spr_plr_walkUp.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Basic",
-    "path":"folders/Sprites/Basic.yy",
+    "name":"Vessel",
+    "path":"folders/Sprites/Basic/Vessel.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

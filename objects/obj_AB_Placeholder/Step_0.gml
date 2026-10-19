@@ -1,5 +1,5 @@
 var ability = function() {
-	if cd == false and global.plrSoftlock <= 0 and WATK_Need == global.WATK {
+	if cd == false and global.plrSoftlock <= 0 {
 		cd = true;
 		alarm[0] = game_get_speed(gamespeed_fps) * 0.185;
 	}

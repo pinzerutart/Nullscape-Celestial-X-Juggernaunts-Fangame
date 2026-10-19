@@ -27,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_playerLegsVertical",
-    "path":"sprites/spr_playerLegsVertical/spr_playerLegsVertical.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

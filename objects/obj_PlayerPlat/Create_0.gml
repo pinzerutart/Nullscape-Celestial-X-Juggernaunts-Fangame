@@ -69,6 +69,8 @@ if not instance_exists(obj_plrHurtbox) {
 }
 
 particleSoulCD = true;
+
+//PARTICLES FOR STUFF
 particlePart = part_system_create();
 particleType = part_type_create();
 part_type_sprite(particleType, spr_redNoBorders, false, false, false);
@@ -76,9 +78,12 @@ part_type_size(particleType, 2, 2, 0, 0);
 part_type_alpha2(particleType, 0.8, 0);
 part_type_life(particleType, 25, 25);
 
+
 //WEAPON
 weapon = instance_create_layer(x, y, global.layerBattleID, asset_get_index("obj_wp_" + global.Weapon));
 
+//MODE
+mode = instance_create_layer(x, y, global.layerBattleID, asset_get_index("obj_md_" + global.Mode));
 
 //ABILITIES
 mainAbility = instance_create_layer(x, y, global.layerBattleID, asset_get_index("obj_AB_" + global.MainAbility));

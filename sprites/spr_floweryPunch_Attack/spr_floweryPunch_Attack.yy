@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Basic",
-    "path":"folders/Sprites/Basic.yy",
+    "name":"Flowery",
+    "path":"folders/Sprites/Basic/Characters/Flowery.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
