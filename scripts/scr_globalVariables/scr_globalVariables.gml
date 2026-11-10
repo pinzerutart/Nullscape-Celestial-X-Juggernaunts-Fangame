@@ -17,6 +17,10 @@ global.plrSoftlock = 0;
 global.plrAnimChange = 2;
 global.plrAnchor = 0;
 global.plrPossesed = false;
+global.plrDied = false;
+global.plrDmgX = 1;
+global.plrDmgDealt = 0;
+global.plrDmgTaken = 0;
 
 //EQUIPMENT
 global.Weapon = "AzuriteSword";
@@ -29,8 +33,18 @@ global.Ability3 = "Nothing";
 global.Mode = "Dash";
 
 //OTHER
+global.Sparks = 0;
+global.SparksMultiplier = 1;
+global.TempMultiplier = 0;
+global.abilityCards = {};
+global.upgradeCards = {};
+global.enemies = {};
+global.Level = 0;
 global.inPlatformer = 0;
 global.inDanger = 0;
 global.language = "English"
+global.camformulaWidth = 1;
+global.camformulaHeight = 1;
 
+global.seenCutscene_Celestial = false;
 global.celestialHardmode = false;

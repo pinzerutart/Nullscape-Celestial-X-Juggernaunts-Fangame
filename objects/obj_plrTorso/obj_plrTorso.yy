@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_playerBodyPlatformerWalk",
-    "path":"sprites/spr_playerBodyPlatformerWalk/spr_playerBodyPlatformerWalk.yy",
+    "name":"spr_plrBodyPlatWalk",
+    "path":"sprites/spr_plrBodyPlatWalk/spr_plrBodyPlatWalk.yy",
   },
   "spriteMaskId":null,
   "visible":true,

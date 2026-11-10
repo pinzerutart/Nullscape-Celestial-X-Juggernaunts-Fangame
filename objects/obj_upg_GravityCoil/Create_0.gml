@@ -1,0 +1,1 @@
+obj_PlayerPlat.defaultJumpHold += 0.25;

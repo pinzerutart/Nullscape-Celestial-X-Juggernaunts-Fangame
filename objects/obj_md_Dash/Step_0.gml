@@ -1,3 +1,5 @@
+if global.plrDied == true { exit; }
+
 var ability = function() {
 	if cd == false and global.inDanger >= 1 and global.plrSP > 0 and global.plrSoftlock <= 0 and (global.plrForce[0] != 0 or global.plrMoving == 1) {
 		cd = true
@@ -13,7 +15,7 @@ var ability = function() {
 		for (var i = 1; i <= 10; i++) {
 			call_later(i * 0.035,time_source_units_seconds,function(){
 				if endedDash == true { exit; }
-				if _p.died == false and instance_exists(_p.ptorso) {
+				if global.plrDied == false and instance_exists(_p.ptorso) {
 					global.plrSpeed -= 10;
 					global.plrSP -= 3;
 					global.plrSpeed -= bonusSpeed / 10;

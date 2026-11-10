@@ -4,5 +4,5 @@ bonusDmg = 4;
 atkStat = 0;
 defThing = 1;
 invF = 0.5;
-sound = snd_hurtSound;
+sound = snd_shieldBreak;
 typeR = 0;

@@ -244,7 +244,8 @@ if isRunning == 1 and global.plrSP <= 0 {
 	global.plrSpeed -= 7;
 }
 
-if global.plrHP <= 0 and died == false {
+if global.plrHP <= 0 and died == false and global.plrRevives <= 0 {
+	global.plrDied = true;
 	died = true;
 	global.camPositionX = camera_get_view_x(view_camera[0]);
 	global.camPositionY = camera_get_view_y(view_camera[0]);

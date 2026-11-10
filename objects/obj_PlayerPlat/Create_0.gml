@@ -9,6 +9,18 @@ global.plrAnimChange = 2;
 
 
 //VARIABLES
+spritesBody = {
+	"Idle": spr_plrBodyPlatIdle,
+	"Walk": spr_plrBodyPlatWalk,
+	"Jump": spr_plrBodyPlatJump,
+	"Fall": spr_plrBodyPlatFall,
+};
+spritesLegs = {
+	"Idle": spr_playerLegsPlatformerIdle,
+	"Walk": spr_playerLegsPlatformerWalk,
+	"Jump": spr_playerLegsPlatformerJump,
+	"Fall": spr_playerLegsPlatformerFall,
+};
 isRunning = 0;
 dashCD = false;
 bA = false;
@@ -19,7 +31,7 @@ died = false;
 invEffect = false;
 invEffectType = 0;
 invEffectFirst = false;
-walking = false;
+otherIdle = 0;
 oneStepDo = false;
 changedDirectionOfAnim = false;
 torsoXOffset = 0;
@@ -28,13 +40,19 @@ torsoXOffsetLeft = 0;
 torsoXOffsetRight = 0;
 legsXOffset = 0;
 legsYOffset = 0;
-otherIdle = 0;
 looking = "R";
 canJump = 1;
 releasedJump = false;
-defaultFlyAmount = 0.2;
+defaultFlyAmount = 0;
 flyAmount = defaultFlyAmount;
-jumpSpare = 0.2;
+flyRegen = 0;
+defaultJumpHold = 0.2;
+jumpHold = defaultJumpHold;
+jumpSpare = 0.2;	
+smoothWalkMultiplier = 0;
+smoothWalkSpeed = 1;
+walkDirectionMultiplier = 1;
+tilt = 0;
 
 
 //SPAWN
@@ -87,3 +105,10 @@ mode = instance_create_layer(x, y, global.layerBattleID, asset_get_index("obj_md
 
 //ABILITIES
 mainAbility = instance_create_layer(x, y, global.layerBattleID, asset_get_index("obj_AB_" + global.MainAbility));
+
+//UPGRADES
+struct_foreach(global.upgradeCards, function(_name,_data){
+	var upgrade = instance_create_layer(x, y, global.layerBattleID, asset_get_index("obj_upg_" + _name));
+	upgrade.stacks = global.upgradeCards[$ _name].Stacks
+	upgrade.startStep = true;
+})

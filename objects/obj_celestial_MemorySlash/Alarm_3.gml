@@ -1,0 +1,1 @@
+startFollowing -= 1;

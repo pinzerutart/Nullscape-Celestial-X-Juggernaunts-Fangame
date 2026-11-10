@@ -9,5 +9,15 @@ global.dialoguesTable = {
 		
 		// CELESTIAL ATTACKS
 		"FALL", // 5
+		"CRUMBLE", // 6
+		"CEASE", // 7
+		"INCINERATE", // 8
+		"BITTER", // 9
+		"DEATH IN BLOOM", // 10
+		"FUTILE", // 11
+		"REMEMBRANCE", // 12
+		"EVISCERATED", // 13
+		"CUT", // 14
+		"SILENCE", // 15
 	],
 };

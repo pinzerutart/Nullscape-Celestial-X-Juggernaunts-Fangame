@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Vessel",
-    "path":"folders/Sprites/Basic/Vessel.yy",
+    "name":"Sword",
+    "path":"folders/Sprites/Basic/Vessel/Sword.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -2,24 +2,24 @@
   "$GMSprite":"v2",
   "%Name":"spr_celestial_orbExplode",
   "bboxMode":2,
-  "bbox_bottom":44,
-  "bbox_left":11,
-  "bbox_right":44,
-  "bbox_top":13,
+  "bbox_bottom":39,
+  "bbox_left":15,
+  "bbox_right":40,
+  "bbox_top":16,
   "collisionKind":2,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"a490a644-f6bb-4063-ab2a-e2ac19a2f5f9","name":"a490a644-f6bb-4063-ab2a-e2ac19a2f5f9","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"c300ff0a-0170-4910-887e-e7a29b4c6067","name":"c300ff0a-0170-4910-887e-e7a29b4c6067","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":56,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"a819ff5a-7471-466f-a1a8-d66ea7acf52b","blendMode":0,"displayName":"default","isLocked":false,"name":"a819ff5a-7471-466f-a1a8-d66ea7acf52b","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"0bc45435-e655-4cfc-9760-879089af81ec","blendMode":0,"displayName":"default","isLocked":false,"name":"0bc45435-e655-4cfc-9760-879089af81ec","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_celestial_orbExplode",
   "nineSlice":{
@@ -88,8 +88,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a490a644-f6bb-4063-ab2a-e2ac19a2f5f9","path":"sprites/spr_celestial_orbExplode/spr_celestial_orbExplode.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"603225c8-eae5-4d1b-ad31-882988dfd596","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"c300ff0a-0170-4910-887e-e7a29b4c6067","path":"sprites/spr_celestial_orbExplode/spr_celestial_orbExplode.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"0723f159-7ea5-4b1a-8894-e7187adc1f72","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

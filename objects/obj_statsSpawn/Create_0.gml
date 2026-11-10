@@ -7,10 +7,12 @@ currentY = camera_get_view_y(view_camera[0]);
 spBar = instance_create_layer(x, y, global.layerBattleID, obj_spBar);
 spBar.image_blend = make_colour_rgb(108,207,255);
 spBar.depth = -999;
-spBar.image_xscale = 0.15;
-spBar.image_yscale = 0.15;
 spBorder = instance_create_layer(x, y, global.layerBattleID, obj_spBorder);
 spBorder.image_blend = make_colour_rgb(39,180,250);
 spBorder.depth = -999;
-spBorder.image_xscale = 0.15;
-spBorder.image_yscale = 0.15;
+
+redHP = instance_create_layer(x, y, global.layerBattleID, obj_redHP);
+redHP.image_blend = make_colour_rgb(200,200,200);
+redHP.depth = -998;
+
+depth = -999;

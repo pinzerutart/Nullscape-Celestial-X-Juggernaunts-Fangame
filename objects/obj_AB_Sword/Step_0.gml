@@ -1,5 +1,11 @@
-if not instance_exists(obj_PlayerPlat) {
+if not instance_exists(obj_PlayerPlat) or global.plrDied == true {
 	exit;
+} else if instance_exists(obj_PlayerPlat) and stepEffectDone == false {
+	stepEffectDone = true;
+	obj_PlayerPlat.spritesBody.Idle = spr_plrBodyPlatIdle_Sword;
+	obj_PlayerPlat.spritesBody.Walk = spr_plrBodyPlatWalk_Sword;
+	obj_PlayerPlat.spritesBody.Jump = spr_plrBodyPlatJump_Sword;
+	obj_PlayerPlat.spritesBody.Fall = spr_plrBodyPlatFall_Sword;
 }
 
 var ability = function() {

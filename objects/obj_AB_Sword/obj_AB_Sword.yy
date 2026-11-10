@@ -10,8 +10,8 @@
   "name":"obj_AB_Sword",
   "overriddenProperties":[],
   "parent":{
-    "name":"PlayerStuff",
-    "path":"folders/Objects/PlayerStuff.yy",
+    "name":"Sword",
+    "path":"folders/Objects/MainAbilities/Sword.yy",
   },
   "parentObjectId":null,
   "persistent":false,

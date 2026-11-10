@@ -9,8 +9,8 @@ if enemyType == 998 {
 	
 	draw_set_font(font_homeVideo_2);
 	var stringg = string( (0 - (HP - MaxHp)) ) + "/" + string(MaxHp)
-	draw_text_colour(currentX + (camWidth / 2.1),(currentY + (camHeight / 1.15)),stringg,color1,color1,color2,color2,1);
+	draw_text_transformed_colour(currentX + (camWidth / 2.1),(currentY + (camHeight / 1.15)),stringg,global.camformulaWidth,global.camformulaHeight,0,color1,color1,color2,color2,1);
 }
 
-
-if celestialStartIntroText == true { textAppear(textTableIntro, celestialDialogID); }
+if celestialStartIntroText == true { textAppear(celestialIntroText, celestialDialogID); }
+if celestialCurrentDialogTable != false { textAppear(celestialCurrentDialogTable, celestialDialogID); }

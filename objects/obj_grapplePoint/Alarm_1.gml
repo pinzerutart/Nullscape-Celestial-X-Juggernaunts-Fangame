@@ -1,0 +1,1 @@
+global.plrSpeed += 10;

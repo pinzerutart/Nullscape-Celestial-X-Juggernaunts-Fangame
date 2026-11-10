@@ -9,8 +9,8 @@
   "name":"obj_cameraPlrFollow",
   "overriddenProperties":[],
   "parent":{
-    "name":"PlayerStuff",
-    "path":"folders/Objects/PlayerStuff.yy",
+    "name":"Camera",
+    "path":"folders/Objects/Camera.yy",
   },
   "parentObjectId":null,
   "persistent":false,

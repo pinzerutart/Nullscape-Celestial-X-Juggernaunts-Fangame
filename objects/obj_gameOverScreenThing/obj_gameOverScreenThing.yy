@@ -6,8 +6,8 @@
   "name":"obj_gameOverScreenThing",
   "overriddenProperties":[],
   "parent":{
-    "name":"Managers",
-    "path":"folders/Objects/Managers.yy",
+    "name":"Other",
+    "path":"folders/Objects/Other.yy",
   },
   "parentObjectId":null,
   "persistent":false,

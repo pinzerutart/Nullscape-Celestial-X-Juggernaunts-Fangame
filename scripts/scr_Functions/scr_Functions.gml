@@ -34,13 +34,66 @@ function shakeObj(theObject, RcdS, Rstrength, Rlose, UorigPos) {
 	helper_shakeObj.startCode = true;
 };
 
-function damage(knockback,dmg,bonusDmg,atk,def,invF,sound,type){
+function draw_text_transformed_colour_outline(_x,_y,_string,_xscale,_yscale,_angle,_c1,_c2,_c3,_c4,_alpha,_outline_col,_thickness){
+	draw_text_transformed_colour(_x - _thickness, _y, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x + _thickness, _y, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x, _y - _thickness, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x, _y + _thickness, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x - _thickness, _y - _thickness, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x + _thickness, _y - _thickness, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x - _thickness, _y + _thickness, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+	draw_text_transformed_colour(_x + _thickness, _y + _thickness, _string, _xscale, _yscale, _angle, _outline_col, _outline_col, _outline_col, _outline_col, _alpha);
+
+	draw_text_transformed_colour(_x, _y, _string, _xscale, _yscale, _angle, _c1, _c2, _c3, _c4, _alpha);
+}
+
+function slainVFX(obj,absorb,thePlayer,StarReward) { // Man, doing these complicated stuff is tiring me up, VERY hard without help from other sources D:
+	var helper = instance_create_depth(obj.x, obj.y, obj.depth - 1, obj_helper_slained);
+	helper.obj = obj;
+	helper.image_xscale = obj.image_xscale;
+	helper.image_yscale = obj.image_yscale;
+	helper.sprite_index = obj.sprite_index;
+	helper.shouldAbsorb = absorb;
+	helper.image_alpha = 0;
+	helper.thePlayer = thePlayer;
+	helper.StarReward = StarReward;
+	helper._startStep = true;
+}
+
+function awardSparks(amount) {
+	global.Sparks += amount * (global.SparksMultiplier + global.TempMultiplier);
+}
+
+function cleanStats() {
+	global.plrSpeed = 15;
+	global.plrSP = 100;
+	global.plrMaxSP = 100;
+	global.plrHP = 100;
+	global.plrMaxHP = 100;
+	global.plrSPAdd = 0.05;
+	global.plrSPDel = 1.5;
+	global.plrMoving = 0;
+	global.plrForce = [0,0];
+	global.plrDF = 0;
+	global.plrResistance = 0;
+	global.plrATK = 0;
+	global.plrInvF = 0;
+	global.inPlatformer = 0;
+	global.inDanger = 0;
+	global.plrDied = false;
+	global.plrDmgX = 1;
+	global.plrDmgDealt = 0;
+	global.plrDmgTaken = 0;
+}
+
+function damage(knockback,dmg,bonusDmg,atk,def,invF,sound,type,damagedTo){
 	if global.plrInvF <= 0 {
 		var actual_damage = dmg + (bonusDmg * atk) - (def * global.plrDF);
 		var resistance = clamp(1 - (global.plrResistance / 100),-999,100);
 		actual_damage *= resistance;
 	
 		global.plrHP -= actual_damage;
+		global.plrDmgTaken += actual_damage;
 		global.plrInvF += invF;
 		
 		
@@ -64,10 +117,10 @@ function damageNpc(npc,knockback,dmg,bonusDmg,atk,def,invF,sound,type){
 		if (damageToDo * 0.05) >= actual_damage {actual_damage = damageToDo * 0.05}
 		var resistance = clamp(1 - (npc.Resistance / 100),-999,100);
 		actual_damage *= resistance;
-		
-		actual_damage = round(actual_damage);
+		actual_damage *= global.plrDmgX;
 	
 		npc.HP -= actual_damage;
+		global.plrDmgDealt += actual_damage;
 		npc.InvF += invF;
 		
 		audio_play_sound(sound,2,false);
@@ -159,6 +212,7 @@ function textAppear(textTable,id_) {
 		var cs2 = make_colour_rgb(255,255,255);
 		var cs3 = make_colour_rgb(255,255,255);
 		var cs4 = make_colour_rgb(255,255,255);
+		var _alpha = 1;
 
 		if (effectList != undefined) {
 			for (var effectIndex = 0; effectIndex < array_length(effectList); effectIndex++) {
@@ -196,9 +250,12 @@ function textAppear(textTable,id_) {
    
 					OffsetRotation += randomRotation * effect.intensity;
 				};
+				if insideEffectRange and effect.type_ == "alpha" {
+					_alpha = effect.intensity;
+				};
 			};
 		};
-		draw_text_transformed_colour((camX + txtX) + OffsetX, (camY + txtY) + OffsetY, character, 1, 1, OffsetRotation, cs1, cs2, cs3, cs4, 1);
+		draw_text_transformed_colour((camX + txtX * global.camformulaWidth) + OffsetX * global.camformulaWidth, (camY + txtY * global.camformulaHeight) + OffsetY * global.camformulaHeight, character, global.camformulaWidth, global.camformulaHeight, OffsetRotation, cs1, cs2, cs3, cs4, _alpha);
 
 		txtX += string_width(character);
 		};

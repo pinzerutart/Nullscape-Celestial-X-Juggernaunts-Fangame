@@ -4,8 +4,9 @@ if (floating) {
 }
 
 if changeSprite == true {
-	var currentIndexToShow = 11 - clamp(round(((global.plrHP / global.plrMaxHP) * 11)), 0, 11)
+	var currentIndexToShow = 10 - clamp(round(((global.plrHP / global.plrMaxHP) * 10)), 0, 10)
 	image_index = currentIndexToShow;
+	if instance_exists(obj_redHP) { obj_redHP.image_index = currentIndexToShow; }
 }
 
 if global.plrHP != lastHP {
